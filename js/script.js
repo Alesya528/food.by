@@ -369,6 +369,11 @@ function showThinksModal(message) {
     
 }
 
+
+fetch('db.json')
+.then(data => data.json())
+.then(res => console.log(res));
+
 // fetch('https://jsonplaceholder.typicode.com/posts', {
 //     method: 'POST',
 //     body: JSON.stringify({name: 'Alex'}),
