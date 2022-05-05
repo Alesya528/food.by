@@ -227,6 +227,12 @@ class PatternCard {
 
 }
 
+const getElemForCard = async(url) => {
+    const elem = await fetch(url);
+
+    return await elem.json();
+};
+
 
 let first = new PatternCard(
     "img/tabs/vegy.jpg",
@@ -275,9 +281,28 @@ let response = {
     end: ' Готово',
 }
 
+const postDate = async(url, data) => {
+    const res = await fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-type': 'application/json'
+        }
+        
+    });
+
+    return await res.json();
+
+};
 
 
-function postData(form){
+
+
+
+
+
+
+function bindPostData(form){
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -295,33 +320,18 @@ function postData(form){
         `;
         form.insertAdjacentElement('afterend', statusLoading);
 
-        const forDate = new FormData(form);
+        const formData = new FormData(form);
 
 
 
 
 
-        const object = {};
-        forDate.forEach(function(value, key){
-            object[key] = value;
-        })
+       const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+
 
         
-
-
-
-
-
-        fetch('server.php', {
-            method: 'POST',
-            body: JSON.stringify(object),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        .then(data => {
-            return data.text()
-        })
+        postDate('http://localhost:3000/requests', json)
         .then(data => {
             console.log(data);
             showThinksModal(response.end);
@@ -340,7 +350,7 @@ function postData(form){
 
 
 forms.forEach( i => {
-    postData(i);
+    bindPostData(i);
 });
 
 
