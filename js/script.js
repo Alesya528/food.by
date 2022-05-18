@@ -438,9 +438,89 @@ const slide = document.querySelectorAll('.offer__slide'),
       slideNumNow = document.getElementById('current'),
       slideNumConst = document.getElementById('total'),
       arrowClickPrev = document.querySelector('.offer__slider-prev'),
-      arrowClickNext = document.querySelector('.offer__slider-next');
+      arrowClickNext = document.querySelector('.offer__slider-next'),
+      slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+      slidesField = document.querySelector('.offer__slider-inner'),
+      width = window.getComputedStyle(slidesWrapper).width;
+
+
 let indexSlide = 1;
-    
+let offset = 0;
+
+
+
+
+if(slide.length < 10){
+    slideNumConst.textContent = `0${slide.length}`;
+    slideNumNow.textContent = `0${indexSlide}`;
+
+}else {
+    slideNumConst.innerHTML = slide.length;
+    slideNumNow.textContent = indexSlide;
+}
+
+
+
+slidesField.style.width = 100 * slide.length + '%';
+slidesField.style.display = 'flex';
+slidesField.style.transition = '0.5s all';
+
+slidesWrapper.style.overflow = 'hidden';
+
+slide.forEach(item => { 
+    item.style.width = width;
+});
+
+
+arrowClickNext.addEventListener('click', () => {
+    if(offset == +parseInt(width) * (slide.length - 1)){
+        offset = 0;
+    }else {
+        offset += +parseInt(width);
+    }
+
+
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    if(indexSlide == slide.length){
+        indexSlide = 1;
+    }else {
+        indexSlide++;
+    }
+
+    if(slide.length < 10){
+        slideNumNow.textContent = `0${indexSlide}`;
+    }else {
+        slideNumNow.textContent = indexSlide;
+    }
+
+});
+
+
+arrowClickPrev.addEventListener('click', () => {
+    if(offset == 0){
+        offset = +parseInt(width) * (slide.length - 1);
+    }else {
+        offset -= +parseInt(width);
+    }
+
+
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    if(indexSlide == 1){
+        indexSlide = slide.length;
+    }else {
+        indexSlide--;
+    }
+
+    if(slide.length < 10){
+        slideNumNow.textContent = `0${indexSlide}`;
+    }else {
+        slideNumNow.textContent = indexSlide;
+    }
+
+});
+
 // function showSlidee(){
 //     arrowClick.addEventListener('click', (e) => {
 //         if(e.target.classList.contains('offer__slider-prev')){
@@ -452,49 +532,49 @@ let indexSlide = 1;
 // }
 // showSlidee();
 
-if (slide.length < 10){
-    slideNumConst.innerHTML = `0${slide.length}`;
-}else{
-    slideNumConst.innerHTML = slide.length;
-}
+// if (slide.length < 10){
+//     slideNumConst.innerHTML = `0${slide.length}`;
+// }else{
+//     slideNumConst.innerHTML = slide.length;
+// }
 
-showSlide(1);
-console.log(slide.length);
+// showSlide(1);
+// console.log(slide.length);
 
-function showSlide(n){
-    if(n > slide.length){
-        indexSlide = 1;
-    };
+// function showSlide(n){
+//     if(n > slide.length){
+//         indexSlide = 1;
+//     };
 
-    if(n < 1){
-        indexSlide = slide.length;
-    };
-
-
-
-    slide.forEach(item => item.style.display = 'none');
-    slide[indexSlide - 1].style.display = 'block';
+//     if(n < 1){
+//         indexSlide = slide.length;
+//     };
 
 
 
-    if (slide.length < 10){
-        slideNumNow.innerHTML = `0${indexSlide}`;
-    }else{
-        slideNumNow.innerHTML = indexSlide;
-    }
-};
+//     slide.forEach(item => item.style.display = 'none');
+//     slide[indexSlide - 1].style.display = 'block';
 
 
 
-function plusSlides(n){
-    showSlide(indexSlide +=n);
-};
+//     if (slide.length < 10){
+//         slideNumNow.innerHTML = `0${indexSlide}`;
+//     }else{
+//         slideNumNow.innerHTML = indexSlide;
+//     }
+// };
 
 
-arrowClickPrev.addEventListener('click', () => {
-    plusSlides(-1);
-});
 
-arrowClickNext.addEventListener('click', () => {
-    plusSlides(1);
-});
+// function plusSlides(n){
+//     showSlide(indexSlide +=n);
+// };
+
+
+// arrowClickPrev.addEventListener('click', () => {
+//     plusSlides(-1);
+// });
+
+// arrowClickNext.addEventListener('click', () => {
+//     plusSlides(1);
+// });
