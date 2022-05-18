@@ -227,44 +227,81 @@ class PatternCard {
 
 }
 
+
 const getElemForCard = async(url) => {
     const elem = await fetch(url);
 
+        if(!elem.ok) {
+            throw new Error(`Could not fetch ${url}, status ${elem.status} `);
+        }
     return await elem.json();
 };
 
+// getElemForCard('http://localhost:3000/menu')
+//     .then(data => {
 
-let first = new PatternCard(
-    "img/tabs/vegy.jpg",
-    'Меню "Фитнес"',
-    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-    229,
-    '.menu .container',
-    // 'menu__item',
-
-).showCard();
+//         data.forEach(({img, title, descr, price}) => {
+//             new PatternCard(img, title, descr, price, '.menu .container').showCard();
+//         });
+//     });
 
 
-let second = new PatternCard(
-    "img/tabs/elite.jpg",
-    'Меню “Премиум”',
-    'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-    550,
-    '.menu .container',
-    'menu__item',
-    'big',
-).showCard();
+getElemForCard('http://localhost:3000/menu')
+    .then( data => createCard(data));
+
+createCard = data => {
+    data.forEach(({img, title, descr, price}) => {
+        const elem = document.createElement('div');
+
+        elem.classList.add('menu__item');
+
+        this.price = price * 27;
+
+        elem.innerHTML = `
+            <img src=${img} alt="vegy">
+            <h3 class="menu__item-subtitle">${title}</h3>
+            <div class="menu__item-descr">${descr}</div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+                <div class="menu__item-cost">Цена:</div>
+                <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+            </div>
+        `;
+        document.querySelector('.menu .container').append(elem);
+    })
+}
+
+// let first = new PatternCard(
+//     "img/tabs/vegy.jpg",
+//     'Меню "Фитнес"',
+//     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+//     229,
+//     '.menu .container',
+//     // 'menu__item',
+
+// ).showCard();
+
+
+// let second = new PatternCard(
+//     "img/tabs/elite.jpg",
+//     'Меню “Премиум”',
+//     'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+//     550,
+//     '.menu .container',
+//     'menu__item',
+//     'big',
+// ).showCard();
 
 
 
-let third = new PatternCard(
-    "img/tabs/post.jpg",
-    'Меню "Постное"',
-    'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.  ',
-    430,
-    '.menu .container',
-    'menu__item',
-).showCard();
+// let third = new PatternCard(
+//     "img/tabs/post.jpg",
+//     'Меню "Постное"',
+//     'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.  ',
+//     430,
+//     '.menu .container',
+//     'menu__item',
+// ).showCard();
 
 
 
@@ -333,7 +370,7 @@ function bindPostData(form){
         
         postDate('http://localhost:3000/requests', json)
         .then(data => {
-            console.log(data);
+            // console.log(data);
             showThinksModal(response.end);
             form.reset();
             statusLoading.remove();
@@ -380,9 +417,9 @@ function showThinksModal(message) {
 }
 
 
-fetch('db.json')
-.then(data => data.json())
-.then(res => console.log(res));
+// fetch('db.json')
+// .then(data => data.json())
+// .then(res => console.log(res));
 
 // fetch('https://jsonplaceholder.typicode.com/posts', {
 //     method: 'POST',
@@ -395,3 +432,69 @@ fetch('db.json')
 //   .then(json => console.log(json))
 
 
+////////////////////////////////////СЛАЙДЕР/////////////////////////////////////////
+
+const slide = document.querySelectorAll('.offer__slide'),
+      slideNumNow = document.getElementById('current'),
+      slideNumConst = document.getElementById('total'),
+      arrowClickPrev = document.querySelector('.offer__slider-prev'),
+      arrowClickNext = document.querySelector('.offer__slider-next');
+let indexSlide = 1;
+    
+// function showSlidee(){
+//     arrowClick.addEventListener('click', (e) => {
+//         if(e.target.classList.contains('offer__slider-prev')){
+//             console.log('ok');
+//         } else if(e.target.classList.contains('offer__slider-next')){
+//              console.log('okkkk')
+//         }
+//     });
+// }
+// showSlidee();
+
+if (slide.length < 10){
+    slideNumConst.innerHTML = `0${slide.length}`;
+}else{
+    slideNumConst.innerHTML = slide.length;
+}
+
+showSlide(1);
+console.log(slide.length);
+
+function showSlide(n){
+    if(n > slide.length){
+        indexSlide = 1;
+    };
+
+    if(n < 1){
+        indexSlide = slide.length;
+    };
+
+
+
+    slide.forEach(item => item.style.display = 'none');
+    slide[indexSlide - 1].style.display = 'block';
+
+
+
+    if (slide.length < 10){
+        slideNumNow.innerHTML = `0${indexSlide}`;
+    }else{
+        slideNumNow.innerHTML = indexSlide;
+    }
+};
+
+
+
+function plusSlides(n){
+    showSlide(indexSlide +=n);
+};
+
+
+arrowClickPrev.addEventListener('click', () => {
+    plusSlides(-1);
+});
+
+arrowClickNext.addEventListener('click', () => {
+    plusSlides(1);
+});

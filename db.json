@@ -22,6 +22,24 @@
       "price": 21
     }
   ],
+  "slider": [
+    {
+      "id": "1",
+      "src": "img/slider/pepper.jpg"
+    },
+    {
+      "id": "2",
+      "src": "img/slider/food-12.jpg"
+    },
+    {
+      "id": "3",
+      "src": "img/slider/olive-oil.jpg"
+    },
+    {
+      "id": "4",
+      "src": "img/slider/paprika.jpg"
+    }
+  ],
   "requests": [
     {
       "name": "csdc",
@@ -37,6 +55,26 @@
       "name": "csdc",
       "phone": "sdvsdvds",
       "id": 3
+    },
+    {
+      "name": "csdc",
+      "phone": "+375291053628",
+      "id": 4
+    },
+    {
+      "name": "csdc",
+      "phone": "+375291053628",
+      "id": 5
+    },
+    {
+      "name": "csdc",
+      "phone": "fghdfh",
+      "id": 6
+    },
+    {
+      "name": "csdc",
+      "phone": "+375291053628",
+      "id": 7
     }
   ]
 }
