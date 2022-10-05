@@ -1,3 +1,9 @@
+import {openModal, closeModal} from './openModal'
+
+
+
+
+
 function sendForm(){
     const forms = document.querySelectorAll('form');
 
@@ -53,7 +59,7 @@ function sendForm(){
 
 
 
-        const json = JSON.stringify(Object.fromEntries(formData.entries()));
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
 
 
@@ -124,4 +130,4 @@ function sendForm(){
 
 }
 
-module.exports = sendForm;
+export default {sendForm};

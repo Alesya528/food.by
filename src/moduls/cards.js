@@ -68,7 +68,7 @@ function cardSend(){
     getElemForCard('http://localhost:3000/menu')
         .then( data => createCard(data));
 
-    createCard = data => {
+        createCard = data => {
         data.forEach(({img, title, descr, price}) => {
             const elem = document.createElement('div');
 
@@ -125,4 +125,4 @@ function cardSend(){
 
 }
 
-module.exports = cardSend;
+export default {cardSend};

@@ -60,4 +60,4 @@ setTime();
 
 }
 
-module.exports = dataTime;
+export default {dataTime};

@@ -1,19 +1,27 @@
-function modalWindow(){
+function openModal(){
+    modalWindow.classList.remove('hidden');
+    modalWindow.classList.add('show');
+    clearTimeout(modalOpentime);
+}
+
+
+function closeModal (){
+    modalWindow.classList.remove('show');
+    modalWindow.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function modalWindow(btnSelector, modalSelector){
 
     
 
-    let btnOpenModel = document.querySelectorAll('[data-model]'),
-    modalWindow = document.querySelector('.modal');
+    let btnOpenModel = document.querySelectorAll(btnSelector),
+    modalWindow = document.querySelector(modalSelector);
 
 
     // console.log(btnCloseModal);
 
-    function openModal(){
-    modalWindow.classList.remove('hidden');
-    modalWindow.classList.add('show');
-
-    clearTimeout(modalOpentime);
-    }
+    
 
 
     btnOpenModel.forEach(item => {
@@ -22,11 +30,7 @@ function modalWindow(){
     });
 
 
-    function closeModal (){
-    modalWindow.classList.remove('show');
-    modalWindow.classList.add('hidden');
-    document.body.style.overflow = '';
-    }
+   
 
 
 
@@ -62,4 +66,5 @@ function modalWindow(){
 
 }
 
-module.exports = modalWindow;
+export default {modalWindow};
+export {openModal, closeModal};
