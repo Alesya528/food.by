@@ -60,4 +60,4 @@ setTime();
 
 }
 
-export default {dataTime};
+export default dataTime;

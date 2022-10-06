@@ -125,4 +125,4 @@ function cardSend(){
 
 }
 
-export default {cardSend};
+export default cardSend;

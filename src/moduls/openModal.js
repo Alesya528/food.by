@@ -5,7 +5,7 @@ function openModal(){
 }
 
 
-function closeModal (){
+function closeModal(){
     modalWindow.classList.remove('show');
     modalWindow.classList.add('hidden');
     document.body.style.overflow = '';
@@ -66,5 +66,5 @@ function modalWindow(btnSelector, modalSelector){
 
 }
 
-export default {modalWindow};
+export default modalWindow;
 export {openModal, closeModal};

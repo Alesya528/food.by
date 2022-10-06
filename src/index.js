@@ -1,5 +1,5 @@
 'use strict'
-    import calc from './moduls/calculater';
+    import calc from './moduls/calculater.js';
     import slider from './moduls/slider';   
     import sendForm from './moduls/sendForm';   
     import cardSend from './moduls/cards';   
@@ -11,7 +11,7 @@
 
 window.addEventListener('DOMContentLoaded', () => {
   
-    calc();
+    calc('.calculating__result span', 'calculating__choose-item_active','.calculating__choose_gender', '.calculating__choose_big');
     slider();
     sendForm();
     cardSend();
@@ -22,3 +22,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
 });
   
+
+console.log(document.querySelector('.calculating__result span'))

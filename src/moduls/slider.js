@@ -236,4 +236,4 @@ function slider(){
 }
 
 
-export default {slider};
+export default slider;

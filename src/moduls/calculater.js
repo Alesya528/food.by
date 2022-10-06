@@ -1,6 +1,6 @@
-function calc(){
-    result = document.querySelector('.calculating__result span');
-
+function calc(resPlase, activeClass, genderBlock, activeBlock   ){
+    let result = document.querySelector(resPlase);
+    
     let sex = 'female',
     hight, weight, old, 
     activ = 1.375;
@@ -16,11 +16,11 @@ function calc(){
 
         if(sex === 'male'){
             result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * hight) - (5.7 * old)) * activ);
-            
+            console.log(Math.round((88.36 + (13.4 * weight) + (4.8 * hight) - (5.7 * old)) * activ));
 
         }else{
             result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * hight) - (4.3 * old)) * activ);
-            
+            console.log(Math.round((447.6 + (9.2 * weight) + (3.1 * hight) - (4.3 * old)) * activ));
         }
 
     }
@@ -51,14 +51,14 @@ function calc(){
                 // console.log(activ, sex);
 
                 parent.forEach(elem => {
-                    elem.classList.remove('calculating__choose-item_active');
+                    elem.classList.remove(activeClass);
                     // console.log(elem);
                 });
 
-                e.target.classList.add('calculating__choose-item_active');
+                e.target.classList.add(activeClass);
                 // console.log(e.target);
                 
-                console.log(hight, weight, old, activ, sex);
+                // console.log(hight, weight, old, activ, sex);
             });
             calcForm();
         })
@@ -66,8 +66,8 @@ function calc(){
 
     };
 
-    staticInfaCalc('.calculating__choose_gender');
-    staticInfaCalc('.calculating__choose_big');
+    staticInfaCalc(genderBlock);
+    staticInfaCalc(activeBlock);
 
     
     
@@ -105,4 +105,4 @@ function calc(){
 
 }
 
-export default {calc};
+export default calc;

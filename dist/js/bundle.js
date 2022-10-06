@@ -12,9 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function calc(){
-    result = document.querySelector('.calculating__result span');
-
+function calc(resPlase, activeClass, genderBlock, activeBlock   ){
+    let result = document.querySelector(resPlase);
+    
     let sex = 'female',
     hight, weight, old, 
     activ = 1.375;
@@ -30,11 +30,11 @@ function calc(){
 
         if(sex === 'male'){
             result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * hight) - (5.7 * old)) * activ);
-            
+            console.log(Math.round((88.36 + (13.4 * weight) + (4.8 * hight) - (5.7 * old)) * activ));
 
         }else{
             result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * hight) - (4.3 * old)) * activ);
-            
+            console.log(Math.round((447.6 + (9.2 * weight) + (3.1 * hight) - (4.3 * old)) * activ));
         }
 
     }
@@ -65,14 +65,14 @@ function calc(){
                 // console.log(activ, sex);
 
                 parent.forEach(elem => {
-                    elem.classList.remove('calculating__choose-item_active');
+                    elem.classList.remove(activeClass);
                     // console.log(elem);
                 });
 
-                e.target.classList.add('calculating__choose-item_active');
+                e.target.classList.add(activeClass);
                 // console.log(e.target);
                 
-                console.log(hight, weight, old, activ, sex);
+                // console.log(hight, weight, old, activ, sex);
             });
             calcForm();
         })
@@ -80,8 +80,8 @@ function calc(){
 
     };
 
-    staticInfaCalc('.calculating__choose_gender');
-    staticInfaCalc('.calculating__choose_big');
+    staticInfaCalc(genderBlock);
+    staticInfaCalc(activeBlock);
 
     
     
@@ -119,7 +119,7 @@ function calc(){
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({calc});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calc);
 
 
 /***/ }),
@@ -261,7 +261,7 @@ function cardSend(){
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({cardSend});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cardSend);
 
 /***/ }),
 
@@ -337,7 +337,7 @@ setTime();
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({dataTime});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dataTime);
 
 /***/ }),
 
@@ -360,7 +360,7 @@ function openModal(){
 }
 
 
-function closeModal (){
+function closeModal(){
     modalWindow.classList.remove('show');
     modalWindow.classList.add('hidden');
     document.body.style.overflow = '';
@@ -421,7 +421,7 @@ function modalWindow(btnSelector, modalSelector){
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({modalWindow});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalWindow);
 
 
 
@@ -570,7 +570,7 @@ function sendForm(){
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({sendForm});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sendForm);
 
 /***/ }),
 
@@ -822,7 +822,7 @@ function slider(){
 }
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({slider});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);
 
 /***/ }),
 
@@ -879,7 +879,7 @@ function tabs(){
 }
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({tabs});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabs);
 
 /***/ })
 
@@ -946,7 +946,7 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _moduls_calculater__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moduls/calculater */ "./src/moduls/calculater.js");
+/* harmony import */ var _moduls_calculater_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moduls/calculater.js */ "./src/moduls/calculater.js");
 /* harmony import */ var _moduls_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moduls/slider */ "./src/moduls/slider.js");
 /* harmony import */ var _moduls_sendForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./moduls/sendForm */ "./src/moduls/sendForm.js");
 /* harmony import */ var _moduls_cards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./moduls/cards */ "./src/moduls/cards.js");
@@ -966,7 +966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener('DOMContentLoaded', () => {
   
-    (0,_moduls_calculater__WEBPACK_IMPORTED_MODULE_0__["default"])();
+    (0,_moduls_calculater_js__WEBPACK_IMPORTED_MODULE_0__["default"])('.calculating__result span', 'calculating__choose-item_active','.calculating__choose_gender', '.calculating__choose_big');
     (0,_moduls_slider__WEBPACK_IMPORTED_MODULE_1__["default"])();
     (0,_moduls_sendForm__WEBPACK_IMPORTED_MODULE_2__["default"])();
     (0,_moduls_cards__WEBPACK_IMPORTED_MODULE_3__["default"])();
@@ -978,6 +978,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
   
 
+console.log(document.querySelector('.calculating__result span'))
 })();
 
 /******/ })()
